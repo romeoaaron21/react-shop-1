@@ -26,7 +26,7 @@ following concepts:
 
 # Live Example
 
-[Here](https://boomcamp.github.io/react-1-1")
+[Here](https://boomcamp.github.io/react-1-1)
 
 ## Part 1
 
