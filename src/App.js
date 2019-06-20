@@ -35,14 +35,24 @@ export default class App extends Component {
 
 
     addToCart(data){
+        let ind = data.id;
+        let cart = this.state.cart;
+
+        // cart.map(cart => {
+        //     if(ind === cart.id){
+        //         count++;
+        //     }
+        // })
+
         this.setState({
             cart: [...this.state.cart, data]
         })
+
+
     }
 
-
-
-
+    
+    
 
     checkout = () => {
         if(this.state.address && this.state.creditCard){
@@ -132,6 +142,7 @@ export default class App extends Component {
                         <div key={data.id} className="cart">
                             <img src={data.imageUrl}/>
                             <h4>{data.title}</h4>
+                            <p>Quantity: {data.quantity}</p>
                             <p>{data.description}</p>
                             <p>{data.price}</p>
                         </div>
