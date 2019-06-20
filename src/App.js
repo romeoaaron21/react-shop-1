@@ -30,29 +30,45 @@ export default class App extends Component {
                 }],
                 address: '',
                 creditCard: '',
+                cardView: true,
             }
     }
 
-
-    addToCart(data){
-        let ind = data.id;
-        let cart = this.state.cart;
-
-        // cart.map(cart => {
-        //     if(ind === cart.id){
-        //         count++;
-        //     }
-        // })
-
-        this.setState({
-            cart: [...this.state.cart, data]
-        })
-
-
+    handleToggleView = () => {
+        let view = this.state.cardView;
+        if(view === true){
+            this.setState({
+                cardView: false
+            })
+        }else{
+            this.setState({
+                cardView: true
+            });
+        }
     }
 
+    addToCart = (data) => {
+        let cart = this.state.cart.map(product => (Object.assign({}), product));
+
+        if (this.state.cart.findIndex(product => product.id === data.id) === -1) {
+          data = Object.assign({}, data, { quantity: 1 });
+          this.setState({ cart: [...this.state.cart, data] });
+        } else {
+          cart[this.state.cart.findIndex(product => product.id === data.id)].quantity++;
+          this.setState({ cart: cart });
+        }
+    }
+
+    deleteFromCart = (data) => {
+        let cart = this.state.cart.map(product => (Object.assign({}), product));
     
-    
+        if (cart[this.state.cart.findIndex(product => product.id === data)].quantity === 1) {
+          cart.splice(this.state.cart.findIndex(product => product.id === data), 1);
+        } else if (cart[this.state.cart.findIndex(product => product.id === data)].quantity > 1) {
+          cart[this.state.cart.findIndex(product => product.id === data)].quantity--;
+        }
+        this.setState({ cart: cart });
+      }
 
     checkout = () => {
         if(this.state.address && this.state.creditCard){
@@ -86,7 +102,9 @@ export default class App extends Component {
 
         return (
             <div className="App">
+                
                 <section className="products">
+                    <button onClick={this.handleToggleView}>Toggle View</button>
                     <h1>Products</h1>
 
                     <h2>Shirts</h2>
@@ -145,6 +163,9 @@ export default class App extends Component {
                             <p>Quantity: {data.quantity}</p>
                             <p>{data.description}</p>
                             <p>{data.price}</p>
+                            <button onClick={() => this.deleteFromCart(data.id)}>
+                  Remove from Cart
+                </button>
                         </div>
                     ))}
 
