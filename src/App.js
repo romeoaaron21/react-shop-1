@@ -109,34 +109,40 @@ export default class App extends Component {
 
                     <h2>Shirts</h2>
                     {shirts.map(data => (
-                        <div key={data.id} className="shirts">
+                        <div key={data.id} className="show">
+                            <div className={this.state.cardView ? 'toggle' : 'view'}>
                             <img src={data.imageUrl}/>
                             <h4>{data.title}</h4>
                             <p>{data.description}</p>
                             <p>{data.price}</p>
                             <button onClick={() => this.addToCart(data)}>Add to Cart</button>
+                            </div>
                         </div>
                     ))}
 
                     <h2>Pants</h2>
                     {pants.map(data => (
-                        <div key={data.id} className="pants">
+                        <div key={data.id} className="show">
+                            <div className={this.state.cardView ? 'toggle' : 'view'}>
                             <img src={data.imageUrl}/>
                             <h4>{data.title}</h4>
                             <p>{data.description}</p>
                             <p>{data.price}</p>
                             <button onClick={() => this.addToCart(data)}>Add to Cart</button>
+                            </div>
                         </div>
                     ))}
 
                     <h2>Hats</h2>
                     {hats.map(data => (
-                        <div key={data.id} className="hats">
+                        <div key={data.id} className="show">
+                            <div className={this.state.cardView ? 'toggle' : 'view'}>
                             <img src={data.imageUrl}/>
                             <h4>{data.title}</h4>
                             <p>{data.description}</p>
                             <p>{data.price}</p>
                             <button onClick={() => this.addToCart(data)}>Add to Cart</button>
+                            </div>
                         </div>
                     ))}
 
@@ -174,4 +180,3 @@ export default class App extends Component {
         )
     }
 }
-
